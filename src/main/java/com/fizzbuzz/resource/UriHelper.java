@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.fizzbuzz.exception.NotFoundException;
 import com.google.common.collect.ImmutableMap;
 
 public abstract class UriHelper {
@@ -17,8 +18,8 @@ public abstract class UriHelper {
         mResourceRoot = resourceRoot;
     }
 
-    protected void initMaps(final ImmutableMap<Class<?>, String> resourceInterfaceToUriPatternToMap) {
-        mResourceInterfaceToUriPatternMap = resourceInterfaceToUriPatternToMap;
+    protected void initMaps(final Map<Class<?>, String> resourceInterfaceToUriPatternToMap) {
+        mResourceInterfaceToUriPatternMap = ImmutableMap.copyOf(resourceInterfaceToUriPatternToMap);
     }
 
     public Set<Entry<Class<?>, String>> geResourceInterfaceTotUriPatternMapEntries() {
@@ -27,7 +28,7 @@ public abstract class UriHelper {
 
     // use this version of getUriForResourceInterface when the URI template contains tokens to be substituted
     public String getUriForResourceInterface(final Class<?> targetResourceInterface,
-            final ImmutableMap<String, String> uriTokenToValueMap) {
+            final Map<String, String> uriTokenToValueMap) {
         return formatUriTemplate(getUriTemplate(targetResourceInterface), uriTokenToValueMap);
     }
 
@@ -36,10 +37,16 @@ public abstract class UriHelper {
         return getUriTemplate(targetResourceInterface);
     }
 
-    public String formatUriTemplate(final String uriTemplate, final ImmutableMap<String, String> uriTokenToValueMap) {
+    // suppress suggestion to make this static; if we did that, subclasses couldn't override it
+    @SuppressWarnings("static-method")
+    public String formatUriTemplate(final String uriTemplate,
+            final Map<String, String> uriTokenToValueMap) {
         String result = uriTemplate;
 
-        for (Map.Entry<String, String> entry : uriTokenToValueMap.entrySet()) {
+        // make an defensive immutable copy of the provided map
+        ImmutableMap<String, String> iMap = ImmutableMap.copyOf(uriTokenToValueMap);
+
+        for (Map.Entry<String, String> entry : iMap.entrySet()) {
             result = result.replace("{" + entry.getKey() + "}", entry.getValue());
         }
         return result;
@@ -50,7 +57,10 @@ public abstract class UriHelper {
     }
 
     private String getUriPattern(final Class<?> resourceInterface) {
-        return mResourceInterfaceToUriPatternMap.get(resourceInterface);
+        String result = mResourceInterfaceToUriPatternMap.get(resourceInterface);
+        if (result == null)
+            throw new NotFoundException("class " + resourceInterface + " not found in UriHelper's map of interfaces to URI patterns");
+        return result;
     }
 
 }

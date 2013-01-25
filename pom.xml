@@ -31,6 +31,19 @@
       <scope>provided</scope>
     </dependency>
 
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>fb-model</artifactId>
+      <version>1.0.3-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>fb-util</artifactId>
+      <version>1.0.3-SNAPSHOT</version>
+    </dependency>
+
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
@@ -38,10 +51,9 @@
     </dependency>
 
     <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>fb-model</artifactId>
-      <version>1.0.2</version>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>${jackson.version}</version>
     </dependency>
-
   </dependencies>
 </project>
