@@ -37,8 +37,6 @@ public abstract class UriHelper {
         return getUriTemplate(targetResourceInterface);
     }
 
-    // suppress suggestion to make this static; if we did that, subclasses couldn't override it
-    @SuppressWarnings("static-method")
     public String formatUriTemplate(final String uriTemplate,
             final Map<String, String> uriTokenToValueMap) {
         String result = uriTemplate;
@@ -59,7 +57,8 @@ public abstract class UriHelper {
     private String getUriPattern(final Class<?> resourceInterface) {
         String result = mResourceInterfaceToUriPatternMap.get(resourceInterface);
         if (result == null)
-            throw new NotFoundException("class " + resourceInterface + " not found in UriHelper's map of interfaces to URI patterns");
+            throw new NotFoundException("class " + resourceInterface
+                    + " not found in UriHelper's map of interfaces to URI patterns");
         return result;
     }
 
