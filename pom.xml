@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.fizzbuzz</groupId>
     <artifactId>maven-parent</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <!-- silence the warning about the parent artifactId being different than the one in the multi-module pom.xml in the parent directory -->
     <relativePath />
   </parent>
@@ -12,6 +12,11 @@
   <artifactId>fb-restlet</artifactId>
   <version>1.0.4-SNAPSHOT</version>
 
+  <properties>
+    <guava.version>10.0.1</guava.version>
+    <fb-model.version>1.0.3</fb-model.version>
+    <fb-util.version>1.0.3</fb-util.version>
+  </properties>
   <dependencies>
 
     <!-- set the slf4j scope to "provided", because there are different versions for different environments (e.g. "regular" vs. android), and the containing 
@@ -35,13 +40,13 @@
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>fb-model</artifactId>
-      <version>1.0.3-SNAPSHOT</version>
+      <version>${fb-model.version}</version>
     </dependency>
 
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>fb-util</artifactId>
-      <version>1.0.3-SNAPSHOT</version>
+      <version>${fb-util.version}</version>
     </dependency>
 
     <dependency>
