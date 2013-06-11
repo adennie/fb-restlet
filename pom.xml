@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>fb-restlet</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.5-SNAPSHOT</version>
 
   <properties>
     <guava.version>10.0.1</guava.version>
@@ -61,8 +61,4 @@
       <version>${jackson.version}</version>
     </dependency>
   </dependencies>
-
-  <scm>
-    <tag>1.0.4</tag>
-  </scm>
 </project>
