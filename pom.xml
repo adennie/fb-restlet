@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.fizzbuzz</groupId>
     <artifactId>maven-parent</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4-SNAPSHOT</version>
     <!-- silence the warning about the parent artifactId being different than the one in the multi-module pom.xml in the parent directory -->
     <relativePath />
   </parent>
@@ -13,9 +13,8 @@
   <version>1.0.5-SNAPSHOT</version>
 
   <properties>
-    <guava.version>10.0.1</guava.version>
-    <fb-model.version>1.0.3</fb-model.version>
-    <fb-util.version>1.0.3</fb-util.version>
+    <fb-model.version>1.0.4-SNAPSHOT</fb-model.version>
+    <fb-util.version>1.0.4-SNAPSHOT</fb-util.version>
   </properties>
   <dependencies>
 
